@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 print('[Weather now] : ' + time_now_text_terminal)
                 print("Temperature : %6.2f C" % temperature_real)
                 print('Pressure : %7.2f hPa' % (pressure_real / 100))
-                print("Humidity : %6.2f %%\n" % humidity_real)
+                print("Humidity : %6.2f %%\033[4A" % humidity_real)
                 time.sleep(second_step)
 
             csv_filename = 'data_BME280_' + time_now_text_file + '.csv'
@@ -45,4 +45,4 @@ if __name__ == '__main__':
             np.savetxt(file_address_usb + csv_filename, dataset, delimiter=',', fmt='%g')
 
     except KeyboardInterrupt:
-        print('Sampling process broken by user...')
+        print('\033[0J\n' + 'Sampling process broken by user...')

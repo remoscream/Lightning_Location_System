@@ -18,7 +18,7 @@ def get_hardware_info():
     # The temperature saved in dictionary 'cpu_thermal' --> list '0' --> tuple '0'
     hardware_info[0, 0] = psutil.sensors_temperatures(fahrenheit=False)['cpu_thermal'][0][1]
     hardware_info[0, 1] = psutil.cpu_freq(percpu=False).current / 1000  # GHz
-    hardware_info[0, 2] = psutil.cpu_percent(interval=0, percpu=False)  # 
+    hardware_info[0, 2] = psutil.cpu_percent(interval=0, percpu=False)  #
     hardware_info[0, 2] = psutil.cpu_percent(interval=0, percpu=False)  # Interval should be set to 0 for a 0s delay
     hardware_info[0, 3] = psutil.virtual_memory().used / 1000 / 1000  # Mega
 
@@ -54,7 +54,7 @@ if __name__ == '__main__':
                 print("Humidity : %6.2f %%\n" % humidity_real)
 
                 print('[Hardware info] : ')
-                print("CPUtemp: %.2fÂ°C, Freq: %.1fGHz, CPUload: %.1f%%, MemoryUsed: %.1fM\n" % (
+                print("CPUtemp: %.2f°C, Freq: %.1fGHz, CPUload: %.1f%%, MemoryUsed: %.1fM\033[0K\033[6A" % (
                     dataset[i, 8], dataset[i, 9], dataset[i, 10], dataset[i, 11]))
 
                 time.sleep(second_step)
@@ -67,4 +67,4 @@ if __name__ == '__main__':
             np.savetxt(file_address_usb + csv_filename, dataset, delimiter=',', fmt='%g')
 
     except KeyboardInterrupt:
-        print('Monitoring process broken by user...')
+        print('\033[0J\n' + 'Monitoring process broken by user...')
