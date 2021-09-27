@@ -54,7 +54,7 @@ if __name__ == '__main__':
                 print("Humidity : %6.2f %%\n" % humidity_real)
 
                 print('[Hardware info] : ')
-                print("CPUtemp: %.2f°C, Freq: %.1fGHz, CPUload: %.1f%%, MemoryUsed: %.1fM\033[0K\033[6A" % (
+                print("CPUtemp: %.2f C, Freq: %.1f GHz, CPUload: %.1f %%, MemoryUsed: %.1f MB\033[0K\033[6A" % (
                     dataset[i, 8], dataset[i, 9], dataset[i, 10], dataset[i, 11]))
 
                 time.sleep(second_step)
