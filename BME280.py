@@ -39,10 +39,8 @@ if __name__ == '__main__':
 
             csv_filename = 'data_BME280_' + time_now_text_file + '.csv'
             file_address_local = '/home/pi/Lightning_Location_System/data_BME280/'
-            file_address_usb = '/home/pi/Ustick/data_BME280/'
 
             np.savetxt(file_address_local + csv_filename, dataset, delimiter=',', fmt='%g')
-            np.savetxt(file_address_usb + csv_filename, dataset, delimiter=',', fmt='%g')
 
     except KeyboardInterrupt:
         print('\033[0J\n' + 'Sampling process broken by user...')
