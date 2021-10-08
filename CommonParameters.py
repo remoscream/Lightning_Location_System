@@ -8,10 +8,10 @@ bus_as3935 = 1
 IRQ_GPIONUM = 4
 
 calibration = 0x07
-parameter_indoor_mode = False
-parameter_noise_floor = 1
-parameter_WDTH = 1
-parameter_SREJ = 1
+indoor_mode = False
+noise_floor = 1
+WDTH = 1
+SREJ = 1
 
 FileAddress_as3935 = 'home/pi/Lightning_Location_System/data_as3935/'
 
