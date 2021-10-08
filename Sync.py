@@ -14,11 +14,11 @@ CloudFileAddress_condition = 'Lightning_Location_System/' + gdrive_foldername + 
 if __name__ == '__main__':
     try:
         while True:
-            subprocess.run('rclone sync' + cp.FileAddress_as3935 + 'gdrive:' + CloudFileAddress_as3935, shell=True,
+            subprocess.run('rclone sync' + cp.FileAddress_as3935 + ' gdrive:' + CloudFileAddress_as3935, shell=True,
                            encoding='utf-8', stdout=subprocess.PIPE)
-            subprocess.run('rclone sync' + cp.FileAddress_bme280 + 'gdrive:' + CloudFileAddress_bme280, shell=True,
+            subprocess.run('rclone sync' + cp.FileAddress_bme280 + ' gdrive:' + CloudFileAddress_bme280, shell=True,
                            encoding='utf-8', stdout=subprocess.PIPE)
-            subprocess.run('rclone sync' + cp.FileAddress_condition + 'gdrive:' + CloudFileAddress_condition,
+            subprocess.run('rclone sync' + cp.FileAddress_condition + ' gdrive:' + CloudFileAddress_condition,
                            shell=True, encoding='utf-8', stdout=subprocess.PIPE)
 
             time.sleep(cp.TimeStep/2)   # Synchronize data to cloud by half the period of local
