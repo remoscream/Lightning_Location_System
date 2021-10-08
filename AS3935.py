@@ -48,6 +48,8 @@ def judge_signal(self):
 
     dataset = np.concatenate((dataset, current_data), axis=0)
 
+    # Replace data file 'data_as3935.csv' when new data comes
+    # Version management will be processed by 'AS3935_DataVerMan.py'
     file_address = cp.FileAddress_as3935
     csv_filename = 'data_as3935.csv'
     np.savetxt(file_address + csv_filename, dataset, delimiter=',', fmt='%g')
