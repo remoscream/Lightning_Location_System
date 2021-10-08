@@ -1,5 +1,3 @@
-#!/bin/bash
-
 tmux kill-session -t AS3935
 
 tmux kill-session -t BME280
