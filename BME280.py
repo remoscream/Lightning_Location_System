@@ -38,6 +38,7 @@ if __name__ == '__main__':
                 print("Temperature : %6.2f °C" % temperature)
                 print('Pressure : %7.2f hPa' % (pressure / 100))
                 print("Humidity : %6.2f %%\033[4A" % humidity)  # '\033[4A' for display data at first position
+
                 time.sleep(cp.TimeStep)
 
             # Save data to csv file
