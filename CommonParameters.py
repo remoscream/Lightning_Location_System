@@ -20,16 +20,16 @@ noise_floor = 1         # Set noise floor (0 to 7, int), this value could be aut
 WDTH = 1                # Set watch dog threshold (WDTH), value is between (0 to 10, int)
 SREJ = 1                # Set spike rejection (SERJ), value is between (0 to 11, int)
 
-FileAddress_as3935 = 'home/pi/Lightning_Location_System/data_as3935/'
+FileAddress_as3935 = '/home/pi/Lightning_Location_System/data_as3935/'
 
 # bme280
 add_bme280 = 0x76   # I2C address of BME280
 bus_bme280 = 1      # Bus number of BME280
 
-FileAddress_bme280 = 'home/pi/Lightning_Location_System/data_bme280/'
+FileAddress_bme280 = '/home/pi/Lightning_Location_System/data_bme280/'
 
 # condition
 add_condition = 0x77    # I2C address of BME280
 bus_condition = 1       # Bus number of BME280
 
-FileAddress_condition = 'home/pi/Lightning_Location_System/data_condition/'
+FileAddress_condition = '/home/pi/Lightning_Location_System/data_condition/'
