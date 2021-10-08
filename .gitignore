@@ -102,6 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.idea
 .env
 .venv
 env/
@@ -130,3 +131,8 @@ dmypy.json
 
 # Scripts
 LineToken.py
+
+# Folders
+data_as3935
+data_bme280
+data_condition

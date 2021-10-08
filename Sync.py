@@ -1,37 +1,27 @@
+import os
 import time
-import shutil
 import subprocess
-from datetime import datetime
+import CommonParameters as cp
 
-gdrive_foldername = 'raspi-kasugai'
+# Find hostname
+gdrive_foldername = '%s' % os.uname()[1]    # The folder name in cloud should be same as hostname of raspi
 
-datapath_AS3935 = 'Lightning_Location_System_Data/' + gdrive_foldername + '/data_AS3935'
-datapath_BME280 = 'Lightning_Location_System_Data/' + gdrive_foldername + '/data_BME280'
-datapath_Condition = 'Lightning_Location_System_Data/' + gdrive_foldername + '/data_Condition'
+# Set file address of data in cloud
+CloudFileAddress_as3935 = 'Lightning_Location_System/' + gdrive_foldername + '/data_as3935'
+CloudFileAddress_bme280 = 'Lightning_Location_System/' + gdrive_foldername + '/data_bme280'
+CloudFileAddress_condition = 'Lightning_Location_System/' + gdrive_foldername + '/data_condition'
 
-# Get hour (now)
-def get_time():
-    dt_now = datetime.now()
-    time_now_hour = int(dt_now.strftime("%H"))
-    time_now_minute = int(dt_now.strftime("%M"))
+if __name__ == '__main__':
+    try:
+        while True:
+            subprocess.run('rclone sync' + cp.FileAddress_as3935 + 'gdrive:' + CloudFileAddress_as3935, shell=True,
+                           encoding='utf-8', stdout=subprocess.PIPE)
+            subprocess.run('rclone sync' + cp.FileAddress_bme280 + 'gdrive:' + CloudFileAddress_bme280, shell=True,
+                           encoding='utf-8', stdout=subprocess.PIPE)
+            subprocess.run('rclone sync' + cp.FileAddress_condition + 'gdrive:' + CloudFileAddress_condition,
+                           shell=True, encoding='utf-8', stdout=subprocess.PIPE)
 
-    return time_now_hour,time_now_minute
+            time.sleep(cp.TimeStep/2)   # Synchronize data to cloud by half the period of local
 
-# Synchronize after first run
-subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_AS3935 gdrive:' + datapath_AS3935, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
-subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_BME280 gdrive:' + datapath_BME280, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
-subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_Condition gdrive:' + datapath_Condition, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
-
-while True:
-    time.sleep(30)
-    hour_now,minute_now = get_time()
-    if hour_now % 5 == 0 and minute_now % 30 == 0 : # Synchronize per 5h30m
-        subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_AS3935 gdrive:' + datapath_AS3935, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
-        subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_BME280 gdrive:' + datapath_BME280, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
-        subprocess.run('rclone sync /home/pi/Lightning_Location_System/data_Condition gdrive:' + datapath_Condition, shell=True, encoding='utf-8', stdout=subprocess.PIPE)
-
+    except KeyboardInterrupt:
+        print('\033[0J\n' + 'Process broken by user...')
