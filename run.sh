@@ -4,4 +4,4 @@ tmux new-session -d -s bme280 'echo && python3 /home/pi/Lightning_Location_Syste
 
 tmux new-session -d -s condition 'echo && python3 /home/pi/Lightning_Location_System/Condition.py'
 
-tmux new-session -d -s sync 'python3 /home/pi/Lightning_Location_System/VerMan_AS3935.py & python3 /home/pi/Lightning_Location_System/Sync.py'
+tmux new-session -d -s sync 'python3 /home/pi/Lightning_Location_System/AS3935_DataVerMan.py & python3 /home/pi/Lightning_Location_System/Sync.py'
