@@ -1,7 +1,7 @@
-tmux kill-session -t AS3935
+tmux kill-session -t as3935
 
-tmux kill-session -t BME280
+tmux kill-session -t bme280
 
-tmux kill-session -t Condition
+tmux kill-session -t condition
 
-tmux kill-session -t Sync
+tmux kill-session -t sync
