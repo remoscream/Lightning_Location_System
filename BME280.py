@@ -41,7 +41,7 @@ if __name__ == '__main__':
                 time.sleep(cp.TimeStep)
 
             # Save data to csv file
-            csv_filename = 'data_BME280_' + time_now_text_file + '.csv'
+            csv_filename = 'data_bme280_' + time_now_text_file + '.csv'
             file_address_local = cp.FileAddress_bme280
 
             np.savetxt(file_address_local + csv_filename, dataset, delimiter=',', fmt='%g')
