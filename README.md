@@ -1,31 +1,21 @@
 # LightningLocationSystem
 
-## 1. BME280
-Main program for running BME280 weather sensor.
+## CommonParameters.py
 
+## Lightning Sensor Module
+### 1. AS3935.py
+### 2. AS3935_Calibration.py
+### 3. AS3935_DataVerMan.py
+### 4. RPi_AS3935.py
 
-## 2. AS3935
-Main program for running AS3935 lightning sensor.
+## Atmosphere Sensor Module
+### 1. BME280.py
+### 2. RPi_BME280.py
 
-## 3. RPi_AS3935
-A basic class used for interacting with the AS3935 lightning sensor from a Raspberry Pi over I2C.
+## System Condition Module (Condition.py)
 
-## 4. VerMan_AS3935
-Managing the version of data.
+## Synchronize With Google Cloud (Sync.py)
 
-## 5. Condition
-Monitoring temperature and humidity of the box which Raspberry Pi and other equipments inside. Also, change the speed of ventilator if necessary.
+## Shell Scripts for Raspberry Pi
 
-The part of BME280 initialization skipped the pressuring measurement (osrs_p = 0).
-As no pressure measured, the definition of rows in `dataset()` is different from 'BME280.py'.
-
-The rows' definition of `dataset()` in this script shows below :
-
-|  |  |  |  |  |  |  |  |  |  |  |  |  |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Row Number | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
-| Defination | Year | Month | Day | Hour | Minute | Second | Box Temperature ('C) | Box Humidty (%) | CPU Temperature ('C) | CPU Frequency (GHz) | CPU Load (%) | Memory Used (M) |
-
-## 6. Sync
-Synchronize data in USB stick to google drive.
 
