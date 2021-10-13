@@ -7,13 +7,14 @@ import CommonParameters as cp
 gdrive_foldername = '%s' % os.uname()[1]    # The folder name in cloud should be same as hostname of raspi
 
 # Set file address of data in cloud
-CloudFileAddress_as3935 = 'Lightning_Location_System/' + gdrive_foldername + '/data_as3935'
-CloudFileAddress_bme280 = 'Lightning_Location_System/' + gdrive_foldername + '/data_bme280'
-CloudFileAddress_condition = 'Lightning_Location_System/' + gdrive_foldername + '/data_condition'
+CloudFileAddress_as3935 = gdrive_foldername + '/data_as3935'
+CloudFileAddress_bme280 = gdrive_foldername + '/data_bme280'
+CloudFileAddress_condition = gdrive_foldername + '/data_condition'
 
 if __name__ == '__main__':
     try:
         while True:
+            # Use rclone to synchronize with google cloud
             subprocess.run('rclone sync ' + cp.FileAddress_as3935 + ' gdrive:' + CloudFileAddress_as3935, shell=True,
                            encoding='utf-8', stdout=subprocess.PIPE)
             subprocess.run('rclone sync ' + cp.FileAddress_bme280 + ' gdrive:' + CloudFileAddress_bme280, shell=True,

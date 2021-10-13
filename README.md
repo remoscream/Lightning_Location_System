@@ -1,4 +1,6 @@
 # LightningLocationSystem
+![Alt text](/images/System_LightningSensor.png?raw=true "Optional Title")
+
 
 ## CommonParameters.py
 
