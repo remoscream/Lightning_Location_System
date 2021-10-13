@@ -16,14 +16,14 @@ if __name__ == '__main__':
     try:
         # Initialization
         filename_old = 'data_as3935.csv'
-        file_address_local = cp.FileAddress_as3935
 
+        time.sleep(20)  # wait for AS3935.py create first file
         while True:
             time_text = get_time_text()
-            filename_new = 'data_AS3935_' + time_text + '.csv'
+            filename_new = 'data_as3935_' + time_text + '.csv'
 
             # Backup data
-            shutil.copy(file_address_local + filename_old, file_address_local + filename_new)
+            shutil.copy(cp.FileAddress_as3935 + filename_old, cp.FileAddress_as3935 + filename_new)
 
             # Waiting for next period
             time.sleep(cp.SyncPeriod)
