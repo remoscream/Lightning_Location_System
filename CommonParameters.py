@@ -6,7 +6,7 @@
 """
 
 # Common
-SyncPeriod = 108000     # Synchronization period for uploading to cloud, unit : second
+SyncPeriod = 1800       # Synchronization period for uploading to cloud, unit : second
 TimeStep = 1            # Time step for saving each data point, unit : second
 
 # as3935
