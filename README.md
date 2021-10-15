@@ -34,6 +34,8 @@
     $ sudo nano  /lib/systemd/system/RunLLS.service
     ```
     2. Add the following text, use `network-online.target` for running the script after network established
+       
+       __(The file `RunLLS.service` can be found in the folder `SetStartupRunning`, you can copy it to `~/lib/systemd/system/`)__
     ```
     [Unit]
     Description=My Script Service
@@ -43,24 +45,30 @@
     [Service]
     Type=simple
     User=pi
-    WorkingDirectory=/home/pi
-    ExecStart=/home/pi/Lightning_Location_System/run.sh
-    
+    ExecStart=/bin/sh /home/pi/Lightning_Location_System/run.sh
+    RemainAfterExit=true
+
     [Install]
     WantedBy=multi-user.target
     ```
-   3. Enable services
+   3. Set priorities
+    ```
+    $ sudo chmod 744 /home/pi/Lightning_Location_System/run.sh
+    $ sudo chmod 664 /lib/systemd/system/RunLLS.service
+    $ sudo systemctl daemon-reload
+    ```
+   4. Enable services
     ```
     $ sudo systemctl enable systemd-networkd
     $ sudo systemctl enable RunLLS.service
     ```
-  4. Test function and reboot
+   5. Reboot to test
     ```
-    $ sudo systemctl start RunLLS.service
     $ sudo reboot
     ```
+  __You can use `SetStartupRunning.sh` in the folder `SetStartupRunning` to run the commands from step 3 to 5__
 
 ### 2. kill.sh
-Scirpt for killing all tmux sessions.
+Script for killing all tmux sessions.
 You can specify the sessions you want to kill in this script.
 
