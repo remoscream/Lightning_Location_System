@@ -1,5 +1,5 @@
 # Table of Contents
-- [1. Background](#Shell Scripts)
+- [Background](#Shell-Scripts)
 - [2. Initialization](#)
 - []()
 - []()
@@ -24,7 +24,7 @@
   - [PCA9600](https://www.datasheets.com/en/part-details/pca9600d-nxp-semiconductors-42660407#datasheet)
 
 
-## Lightning Sensor Module
+##Lightning Sensor Module
 ### 1. [AS3935.py](./AS3935.py)
 The main program for AS3935. This program is referenced from the website below :
 - [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
