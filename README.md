@@ -137,7 +137,13 @@ As the [System Condition Module](#4.-System-Condition-Module) (4) also use BME28
 [Condition.py](./Condition.py)
 
 ## 5. Synchronize With Google Cloud 
-[Sync.py](./Sync.py)
+In this project, we use `rclone` to synchronize with Google Drive in [Sync.py](./Sync.py).
+
+The synchronization cycle is set to half of `SyncPeriod` defined in `CommonParameters.py`.
+
+__I recommend you to creat the destination folders in the cloud before the first synchronization that you can check whether the path is right when first running.__
+
+
 
 ## 6. Shell Scripts
 ### 6.1 run.sh
