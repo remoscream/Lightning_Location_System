@@ -1,4 +1,4 @@
-import smbus2
+import smbus
 
 t_fine = 0.0  # A fine resolution temperature value over to the pressure and humidity compensation formula
 
@@ -88,7 +88,7 @@ class RPi_BME280:
 
     def __init__(self, address, bus=1):
         self.address = address
-        self.i2cbus = smbus2.SMBus(bus)
+        self.i2cbus = smbus.SMBus(bus)
 
     def write_register(self, reg_address, data):
         """Write register
