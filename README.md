@@ -20,7 +20,7 @@ This README file will tell you the function of each script and how to use them.
 (Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
 
 ## Table of Contents
-[1. Initialization](#-Initialization)
+- [ShellScirpts](#Atmosphere-Sensor-Module)
 [](#)
 [](#)
 [](#)
