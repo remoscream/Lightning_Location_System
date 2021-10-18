@@ -1,12 +1,29 @@
-# Table of Contents
-- [Background](#Shell-Scripts)
-- [2. Initialization](#)
-- []()
-- []()
-- []()
+# Lightning_Location_System
+This is a joint research between Yasui Laboratory in Nagoya Institute of Technology (Japan) and Chubu Electrical Safety Services Foundation (Japan).
 
-## Background
+The author of this repository is a PhD student from Nagoya Institute of Technology.
 
+Since most of the code which control the hardware of the lightning location system in this project are referenced/adjusted from network, so I upload them to this public repository.
+
+The photos of the system in each location is below : 
+
+![System](./images/System.png?raw=true "")
+
+We use Raspberry Pi 4 Model B (8G) to control this system and upload data to the Google Drive through an LTE module which called 4gpi made by MECHATRAX.
+- [4gpi Product Introduction (Japanese)](https://mechatrax.com/products/4gpi/)
+- [4gpi Github Repository](https://github.com/mechatrax/4gpi)
+
+This README file will tell you the function of each script and how to use them.
+
+(Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
+
+## Table of Contents
+[1. Background](#-Initialization)
+[](#)
+[](#)
+[](#)
+[](#)
+---
 
 ## Initialization ([CommonParameters.py](./CommonParameters.py))
 - This script saves parameters that may be usually changed for convenience in this LLS project.
