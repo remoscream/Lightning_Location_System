@@ -131,10 +131,20 @@ We use I2C bus to let BME280 communicate with raspberry pi and the suggested set
 As the [System Condition Module](#4.-System-Condition-Module) (4) also use BME280 to measure the temperature and humidity in the plastic box. I pulled out some common code to `RPi_BME280.py` for simplifying the `BME280.py` and `Condition.py`.
 
 ### 3.2 RPi_BME280.py
-[RPi_BME280.py](./RPi_BME280.py)
+[RPi_BME280.py](./RPi_BME280.py) is a basic class used for interacting with the BME280 from a Raspberry Pi over I2C.
+
+The program is based on the samples in datasheet.
 
 ## 4. System Condition Module 
-[Condition.py](./Condition.py)
+As the lightning location systems in this project are controlled remotely and 1 of them are very far from our office. We want to know of information of the system in plastic box. 
+
+So in [Condition.py](./Condition.py), we use BME280 to detect the temperature and humidity inside the plastic box, use `psutil` to get the cpu temperature of the raspberry pi.
+
+If the system detected an overheat or continuous high humidity in a long time, it will send a message to us.
+
+__(For some reasons, the program for sending notifications could not be set as public)__
+
+On the PCB of this module, we add a button (the red button on the up-left of the module in the photo) for running `sudo halt` on raspberry pi when we need to shut down the system without using a computer.
 
 ## 5. Synchronize With Google Cloud 
 In this project, we use `rclone` to synchronize with Google Drive in [Sync.py](./Sync.py).
@@ -142,8 +152,6 @@ In this project, we use `rclone` to synchronize with Google Drive in [Sync.py](.
 The synchronization cycle is set to half of `SyncPeriod` defined in `CommonParameters.py`.
 
 __I recommend you to creat the destination folders in the cloud before the first synchronization that you can check whether the path is right when first running.__
-
-
 
 ## 6. Shell Scripts
 ### 6.1 run.sh
