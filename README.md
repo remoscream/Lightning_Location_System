@@ -9,19 +9,19 @@
 
 - This script has been imported as `cp` in the program of each module.
 - Before using this script to set up your system, I highly recommend you to read the datasheets related to this project.Here is a list of datasheets I suggest you to read :
-  - AS3935 : https://datasheetspdf.com/datasheet/AS3935.html
-  - AS3935 module : https://akizukidenshi.com/catalog/g/gK-08685/ (Japanese)
-  - BME280 : https://www.datasheets.com/en/part-details/bme280-bosch-67258952#datasheet
-  - BME280 module : https://akizukidenshi.com/catalog/g/gK-09421/ (Japanese)
-  - MT3333 : https://www.datasheets.com/en/part-details/mt3333av-mediatek-424168090#datasheet
-  - GNSS module : https://akizukidenshi.com/catalog/g/gK-13850/ (Japanese)
-  - PCA9600 : https://www.datasheets.com/en/part-details/pca9600d-nxp-semiconductors-42660407#datasheet
+  - [AS3935](https://datasheetspdf.com/datasheet/AS3935.html)
+  - [AS3935 module (Japanese)](https://akizukidenshi.com/catalog/g/gK-08685/) 
+  - [BME280](https://www.datasheets.com/en/part-details/bme280-bosch-67258952#datasheet)
+  - [BME280 module (Japanese)](https://akizukidenshi.com/catalog/g/gK-09421/) 
+  - [MT3333](https://www.datasheets.com/en/part-details/mt3333av-mediatek-424168090#datasheet)
+  - [GNSS module (Japanese)](https://akizukidenshi.com/catalog/g/gK-13850/) 
+  - [PCA9600](https://www.datasheets.com/en/part-details/pca9600d-nxp-semiconductors-42660407#datasheet)
 
 
 ## Lightning Sensor Module
 ### 1. [AS3935.py](./AS3935.py)
 The main program for AS3935. This program is referenced from the website below :
-- Ishikawa-lab : https://www.ishikawa-lab.com/RasPi_lightning.html (Japanese)
+- [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
 
 The packages you need is list below: 
 ```
@@ -31,14 +31,14 @@ sudo pip3 install RPi.GPIO
 sudo apt -y install python3-numpy
 ```
 As we often need to adjust the parameters `WDTH` and `SREJ` for different electromagnetic environments, so I not use `pip3 install RPi_AS3935` but download from pypi and modified it for adjust `WDTD` and `SREJ` more easily.
-- Original `RPi_AS3935.py` : https://pypi.org/project/RPi_AS3935/
+- [Original RPi_AS3935.py (pypi)](https://pypi.org/project/RPi_AS3935/)
 
 Therefore, you should use `RPi_AS3935.py` in this repository for this project.
 
 ### 2. [AS3935_Calibration.py](./AS3935_Calibration.py)
 This program is based this the repository below :
 
-- RaspberryPi-AS3935 : https://github.com/pcfens/RaspberryPi-AS3935/wiki/Calibration-Sample
+- [RaspberryPi-AS3935 (Created by Phil Fenstermacher)](https://github.com/pcfens/RaspberryPi-AS3935/wiki/Calibration-Sample)
 
 From the datasheet of AS39395 :
 >The AS3935 uses a loop antenna based on parallel LC resonator. The antenna has to be designed to have its resonance frequency at 500kHz and a quality factor of around 15.
@@ -51,7 +51,7 @@ __(We use the default value of the register REG0x03[7:6] which is 00 to set the 
 
 ### 3. [RPi_AS3935.py](./RPi_AS3935.py)
 A basic class used for interacting with the AS3935 lightning sensor from a Raspberry Pi over I2C.
-- Original `RPi_AS3935.py` : https://pypi.org/project/RPi_AS3935/
+- [Original RPi_AS3935.py (pypi)](https://pypi.org/project/RPi_AS3935/)
 
 The code for adjusting `WDTH` and `SREJ` outside in this program is below : 
 ```
