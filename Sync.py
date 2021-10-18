@@ -22,7 +22,7 @@ if __name__ == '__main__':
             subprocess.run('rclone sync ' + cp.FileAddress_condition + ' gdrive:' + CloudFileAddress_condition,
                            shell=True, encoding='utf-8', stdout=subprocess.PIPE)
 
-            time.sleep(cp.TimeStep/2)   # Synchronize data to cloud by half the period of local
+            time.sleep(cp.SyncPeriod/2)   # Synchronize data to cloud by half the period of local
 
     except KeyboardInterrupt:
         print('\033[0J\n' + 'Process broken by user...')
