@@ -20,21 +20,28 @@ This README file will tell you the function of each script and how to use them.
 (Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
 
 ## Table of Contents
-- [ShellScirpts](#Atmosphere-Sensor-Module)
-[](#)
-[](#)
-[](#)
-[](#)
+- [1. Initilization](#Initialization)
+- [2. Lightning Sensor Module](#Lightning-Sensor-Module)
+  - [2.1 AS3935.py](#1.-AS3935.py)
+  - [2.2 AS3935_Calibration.py](#2.-AS3935_Calibration.py)
+  - [2.3 RPi_AS3935.py](#3.-RPi_AS3935.py)
+- [3. Atmosphere Sensor Module](#Atmosphere-Sensor-Module)
+  - [3.1 BME280.py](#1.-BME280.py)
+  - [3.2 RPi_BME280.py](#2.-RPi_BME280.py)
+- [4. System Condition Module](#System-Condition-Module)
+- [5. Synchronize With Google Cloud](#Synchronize-With-Google-Cloud)
+- [6. Shell Scripts](#Shell-Scripts)
+  - [6.1 run.sh](#1.-run.sh)
+  - [6.2 kill.sh](#2.-kill.sh)
+  - [6.3 DeleteData.sh](#3.-DeleteData.sh)
 ---
 
-## Initialization 
-[[CommonParameters.py](./CommonParameters.py)]
-- This script saves parameters that may be usually changed for convenience in this LLS project.
+## Initialization
+- [CommonParameters.py](./CommonParameters.py) saves parameters that may be usually changed for convenience in this LLS project. It has been imported as `cp` in the program of each module.
 
   __(Be attention, this script not contains all parameters of each sensor like BME280 which has so many parameters for different environments. If you can not find the parameters that written on the datasheets of the sensors in this script, please check them in the program of each module, especially the files with a head of `Rpi_`.)__
 
-- This script has been imported as `cp` in the program of each module.
-- Before using this script to set up your system, I highly recommend you to read the datasheets related to this project.Here is a list of datasheets I suggest you to read :
+- Before using `CommonParameters.py` to set up your system, I highly recommend you to read the datasheets related to this project.Here is a list of datasheets I suggest you to read :
   - [AS3935](https://datasheetspdf.com/datasheet/AS3935.html)
   - [AS3935 module (Japanese)](https://akizukidenshi.com/catalog/g/gK-08685/) 
   - [BME280](https://www.datasheets.com/en/part-details/bme280-bosch-67258952#datasheet)
@@ -45,8 +52,8 @@ This README file will tell you the function of each script and how to use them.
 
 
 ## Lightning Sensor Module
-### 1. [AS3935.py](./AS3935.py)
-The main program for AS3935. This program is referenced from the website below :
+### 1. AS3935.py
+[AS3935.py](./AS3935.py) is the main program for AS3935. This program is referenced from the website below :
 - [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
 
 The packages you need is list below: 
@@ -61,8 +68,8 @@ As we often need to adjust the parameters `WDTH` and `SREJ` for different electr
 
 Therefore, you should use `RPi_AS3935.py` in this repository for this project.
 
-### 2. [AS3935_Calibration.py](./AS3935_Calibration.py)
-This program is based this the repository below :
+### 2. AS3935_Calibration.py
+[AS3935_Calibration.py](./AS3935_Calibration.py) is based this the repository below :
 
 - [RaspberryPi-AS3935 (Created by Phil Fenstermacher)](https://github.com/pcfens/RaspberryPi-AS3935/wiki/Calibration-Sample)
 
@@ -75,8 +82,8 @@ For a better performance of the AS3935, you need to use this program and an osci
 
 __(We use the default value of the register REG0x03[7:6] which is 00 to set the division ratio to 16, so the best frequency should around 500/16=31.25kHz)__
 
-### 3. [RPi_AS3935.py](./RPi_AS3935.py)
-A basic class used for interacting with the AS3935 lightning sensor from a Raspberry Pi over I2C.
+### 3. RPi_AS3935.py
+[RPi_AS3935.py](./RPi_AS3935.py) is a basic class used for interacting with the AS3935 lightning sensor from a Raspberry Pi over I2C.
 - [Original RPi_AS3935.py (pypi)](https://pypi.org/project/RPi_AS3935/)
 
 The code for adjusting `WDTH` and `SREJ` outside in this program is below : 
@@ -94,21 +101,26 @@ def set_SREJ(self, SREJ):
     self.set_byte(0x02, write_SREJ)
 ```
 
-### 4. [AS3935_DataVerMan.py](./AS3935_DataVerMan.py)
-As the `AS3935.py` uses a watchdog when detecting lightning, it's not easy to let the program save the data matrix periodically for backup multiple versions. So I write 
+### 4. AS3935_DataVerMan.py
+As the `AS3935.py` uses a watchdog when detecting lightning, it's not easy to let the program save the data matrix periodically for backup multiple versions. So I write [AS3935_DataVerMan.py](./AS3935_DataVerMan.py)
 
 
 ## Atmosphere Sensor Module
-### 1. [BME280.py](./BME280.py)
-### 2. [RPi_BME280.py](./RPi_BME280.py)
+### 1. BME280.py
+[BME280.py](./BME280.py)
 
-## System Condition Module ([Condition.py](./Condition.py))
+### 2. RPi_BME280.py
+[RPi_BME280.py](./RPi_BME280.py)
 
-## Synchronize With Google Cloud ([Sync.py](./Sync.py))
+## System Condition Module 
+[Condition.py](./Condition.py)
+
+## Synchronize With Google Cloud 
+[Sync.py](./Sync.py)
 
 ## Shell Scripts
-### 1. [run.sh](./run.sh)
-- Scirpt for running all modules in several seperate tmux sessions.
+### 1. run.sh
+- [run.sh](./run.sh) can run all modules in several seperate tmux sessions.
 
 - A `git pull origin main` on the head is for getting the latest version of scirpts before running.
 
@@ -154,19 +166,15 @@ As the `AS3935.py` uses a watchdog when detecting lightning, it's not easy to le
     ```
   __You can use `SetStartupRunning.sh` in the folder `SetStartupRunning` to run the commands from step 3 to 5__
 
-### 2. [kill.sh](./kill.sh)
-Script for killing all tmux sessions.
+### 2. kill.sh
+[kill.sh](./kill.sh) can all tmux sessions.
 You can specify the sessions you want to kill in this script.
 
-### 3. [DeleteData.sh](./DeleteData.sh)
-Script for deleting all data in the local folders when debug program.
+### 3. DeleteData.sh
+[DeleteData.sh](./DeleteData.sh) can delete all data in the local folders when debug program.
 
 You should confirm your action before the deletion. (Input `Y` to confirm)
 
 __<span style="color: red; ">But be attention!!! This is very dangerous when you have old data on the cloud especially when `Sync.py` is running. </span>__
 
 __<span style="color: red; ">I highly recommend you to check the data on the cloud and backup the data whether it's really useful before the deletion. </span>__
-
-
-![SunShield](./images/System_LightningSensor.png?raw=true "sunshield")
-![PlasticBox](./images/System_PlasticBox.png?raw=true "plasticbox")
