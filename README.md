@@ -19,6 +19,18 @@ This README file will tell you the function of each script and how to use them.
 
 (Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
 
+The linux and python packages used in this project is below :
+```
+sudo apt install tmux
+sudo apt -y install i2c-tools
+sudo pip3 install RPi.GPIO
+sudo pip3 install smbus
+sudo pip3 install smbus2
+sudo apt -y install python3-numpy
+sudo pip3 install psutil
+curl https://rclone.org/install.sh | sudo bash
+```
+
 ## Index
 - [1. Initilization](#1.-Initialization)
 - [2. Lightning Sensor Module](#2.-Lightning-Sensor-Module)
@@ -56,17 +68,16 @@ This README file will tell you the function of each script and how to use them.
 [AS3935.py](./AS3935.py) is the main program for AS3935. This program is referenced from the website below :
 - [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
 
-The packages you need is list below: 
-```
-sudo apt -y install i2c-tools
-sudo pip3 install smbus
-sudo pip3 install RPi.GPIO
-sudo apt -y install python3-numpy
-```
+When lightning comes, the data file `data_as3935.csv` will be overwritten by new data. We use [AS3935_DataVerMan.py](.\AS3935_DataVerMan.py) (2.4) to back up different versions periodically. 
+
+We use I2C bus to let AS3935 communicate with raspberry pi.
+
 As we often need to adjust the parameters `WDTH` and `SREJ` for different electromagnetic environments, so I not use `pip3 install RPi_AS3935` but download from pypi and modified it for adjust `WDTD` and `SREJ` more easily.
 - [Original RPi_AS3935.py (pypi)](https://pypi.org/project/RPi_AS3935/)
 
 Therefore, you should use `RPi_AS3935.py` in this repository for this project.
+
+
 
 ### 2.2 AS3935_Calibration.py
 [AS3935_Calibration.py](./AS3935_Calibration.py) is based this the repository below :
@@ -102,12 +113,22 @@ def set_SREJ(self, SREJ):
 ```
 
 ### 2.4 AS3935_DataVerMan.py
-As the `AS3935.py` uses a watchdog when detecting lightning, it's not easy to let the program save the data matrix periodically for backup multiple versions. So I write [AS3935_DataVerMan.py](./AS3935_DataVerMan.py)
+- As the `AS3935.py` uses a watchdog when detecting lightning, it's not easy to let the program save the data matrix periodically for back up multiple versions. 
 
+  I write [AS3935_DataVerMan.py](./AS3935_DataVerMan.py) to create a copy of `data_as3935.csv` with a name contains time by a specific time period outside the main program `AS3935.py`. 
+
+- The synchronization cycle is same as other sensors because the `SyncPeriod` is defined in `CommonParameters.py`.
 
 ## 3. Atmosphere Sensor Module
 ### 3.1 BME280.py
-[BME280.py](./BME280.py)
+[BME280.py](./BME280.py) is the main program for BME280 in this module. This program is also referenced from the Ishikawa-lab :
+- [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
+
+We use I2C bus to let BME280 communicate with raspberry pi and the suggested settings for weather monitoring is used in this project which you can find in datasheet.
+
+![System](./images/ModeInBME280Datasheet.PNG)
+
+As the [System Condition Module](#4.-System-Condition-Module) (4) also use BME280 to measure the temperature and humidity in the plastic box. I pulled out some common code to `RPi_BME280.py` for simplifying the `BME280.py` and `Condition.py`.
 
 ### 3.2 RPi_BME280.py
 [RPi_BME280.py](./RPi_BME280.py)
