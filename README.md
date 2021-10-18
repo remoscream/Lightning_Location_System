@@ -1,6 +1,7 @@
 # LightningLocationSystem
 
-![Alt text](/images/System_LightningSensor.png?raw=true "Optional Title")
+![SunShield](/images/System_LightningSensor.png?raw=true "sunshield")
+![PlasticBox](/images/System_PlasticBox.png?raw=true "plasticbox")
 
 
 ## CommonParameters.py
