@@ -2,6 +2,7 @@
 This is a joint research between Yasui Laboratory in Nagoya Institute of Technology (Japan) and Chubu Electrical Safety Services Foundation (Japan).
 
 The author of this repository is a PhD student from Nagoya Institute of Technology.
+- [Yasui Laboratory (Nagoya Institute of Technology)](http://yasui-lab.web.nitech.ac.jp/)
 
 Since most of the code which control the hardware of the lightning location system in this project are referenced/adjusted from network, so I upload them to this public repository.
 
@@ -9,26 +10,28 @@ The photos of the system in each location is below :
 
 ![System](./images/System.png?raw=true "")
 
-We use Raspberry Pi 4 Model B (8G) to control this system and upload data to the Google Drive through an LTE module which called 4gpi made by MECHATRAX.
+We use Raspberry Pi 4 Model B (8G) to control this system and upload data to the Google Drive through an LTE module which called 4gpi based on SIM7600 made by MECHATRAX.
 - [4gpi Product Introduction (Japanese)](https://mechatrax.com/products/4gpi/)
 - [4gpi Github Repository](https://github.com/mechatrax/4gpi)
+- [SIM7600 Datasheet](https://www.datasheets.com/en/part-details/sim7600g-simcom-wireless-solutions-415309951#datasheet)
 
 This README file will tell you the function of each script and how to use them.
 
 (Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
 
 ## Table of Contents
-[1. Background](#-Initialization)
+[1. Initialization](#-Initialization)
 [](#)
 [](#)
 [](#)
 [](#)
 ---
 
-## Initialization ([CommonParameters.py](./CommonParameters.py))
+## Initialization 
+[[CommonParameters.py](./CommonParameters.py)]
 - This script saves parameters that may be usually changed for convenience in this LLS project.
 
-  __(Be attention, this script not contains all parameters of each sensor like BME280 has so many parameters for different environments. If you can not find the parameters that written on the datasheets of the sensors, please check them in the program of each module, especially the files with a head of `Rpi_`.)__
+  __(Be attention, this script not contains all parameters of each sensor like BME280 which has so many parameters for different environments. If you can not find the parameters that written on the datasheets of the sensors in this script, please check them in the program of each module, especially the files with a head of `Rpi_`.)__
 
 - This script has been imported as `cp` in the program of each module.
 - Before using this script to set up your system, I highly recommend you to read the datasheets related to this project.Here is a list of datasheets I suggest you to read :
@@ -41,7 +44,7 @@ This README file will tell you the function of each script and how to use them.
   - [PCA9600](https://www.datasheets.com/en/part-details/pca9600d-nxp-semiconductors-42660407#datasheet)
 
 
-##Lightning Sensor Module
+## Lightning Sensor Module
 ### 1. [AS3935.py](./AS3935.py)
 The main program for AS3935. This program is referenced from the website below :
 - [Ishikawa-lab (Japanese)](https://www.ishikawa-lab.com/RasPi_lightning.html)
