@@ -17,7 +17,9 @@ We use Raspberry Pi 4 Model B (8G) to control this system and upload data to the
 
 This README file will tell you the function of each script and how to use them.
 
-(Maybe I will upload diagrams of hardware and software in the future if my collaborators agree?) 
+Here is a figure to explain the data flow of this system:
+![DataFlow](./images/LLS_DataFlow.png?raw=true "")
+
 
 The linux and python packages used in this project is below :
 ```
