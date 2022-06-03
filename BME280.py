@@ -49,7 +49,7 @@ if __name__ == '__main__':
                 dataset.append(current_data)
 
                 # Print data in terminal
-                print('\n' + dt_now_reformat_str)
+                print(dt_now_reformat_str)
                 print("Temperature : %6.2f °C" % temperature)
                 print('Pressure : %7.2f hPa' % (pressure / 100))
                 print("Humidity : %6.2f %%\033[4A" % humidity)  # '\033[4A' for display data at first position
