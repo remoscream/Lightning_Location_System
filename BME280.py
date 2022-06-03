@@ -1,8 +1,17 @@
+"""
+This version use list instead of numpy for creating data
+
+The format of data change to 4 columns as ['Time', 'Temperature', 'Pressure', 'Humidity']
+"""
+
+import functions_common as fun
 from RPi_BME280 import RPi_BME280
-from Get_Time import get_time
 import CommonParameters as cp
 import time
-import numpy as np
+
+
+# from Get_Time import get_time
+# import numpy as np
 
 # Initialization
 sensor = RPi_BME280(address=cp.add_bme280, bus=cp.bus_bme280)
@@ -14,27 +23,33 @@ sensor.get_calibration_param()
 if __name__ == '__main__':
     try:
         data_num = int(cp.SyncPeriod / cp.TimeStep)
-        dataset = np.zeros((data_num, 9))
 
-        # Main loop for sampling
+        # Sampling
         while True:
-            time_now_text_terminal, time_now_text_file, time_now_int = get_time()
+            dataset = []
+            current_data = [0, 0, 0, 0]
+
+            _, dt_now_reformat_int = fun.get_time_now()
+
             # Sub loop for creating each data file
             for i in range(0, data_num, 1):
                 # Create time text
-                time_now_text_terminal, time_now_text_file, time_now_int = get_time()
-                dataset[i, 0:6] = time_now_int[0, 0:6]
+                # time_now_text_terminal, time_now_text_file, time_now_int = get_time()
+                dt_now_reformat_str, _ = fun.get_time_now()
+                current_data[0] = dt_now_reformat_str
 
                 # Read data from sensor
                 temperature, pressure, humidity = sensor.read_data()
 
                 # Save data to array
-                dataset[i, 6] = temperature
-                dataset[i, 7] = pressure / 100
-                dataset[i, 8] = humidity
+                current_data[1] = temperature
+                current_data[2] = pressure / 100
+                current_data[3] = humidity
+
+                dataset.append(current_data)
 
                 # Print data in terminal
-                print('[Weather now] : ' + time_now_text_terminal)
+                print('\n' + dt_now_reformat_str)
                 print("Temperature : %6.2f °C" % temperature)
                 print('Pressure : %7.2f hPa' % (pressure / 100))
                 print("Humidity : %6.2f %%\033[4A" % humidity)  # '\033[4A' for display data at first position
@@ -42,10 +57,9 @@ if __name__ == '__main__':
                 time.sleep(cp.TimeStep)
 
             # Save data to csv file
-            csv_filename = 'data_bme280_' + time_now_text_file + '.csv'
-            file_address_local = cp.FileAddress_bme280
-
-            np.savetxt(file_address_local + csv_filename, dataset, delimiter=',', fmt='%g')
+            dataset_header = ['Time', 'Temperature', 'Pressure', 'Humidity']
+            filename = 'data_bme280_' + dt_now_reformat_int + '.csv'
+            fun.save_list_to_csv(cp.FileAddress_bme280 + filename, dataset, dataset_header)
 
     except KeyboardInterrupt:
         print('\033[0J\n' + 'Sampling process broken by user...')
