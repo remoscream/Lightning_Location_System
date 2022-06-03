@@ -1,9 +1,15 @@
+"""
+This version use list instead of numpy for creating data
+
+The format of data change to 3 columns as ['Time', 'Marker', 'Distance']
+(Use string time and delete energy)
+"""
+
+import functions_common as fun
 from RPi_AS3935 import RPi_AS3935
-from Get_Time import get_time
 import CommonParameters as cp
 import RPi.GPIO as GPIO
 import time
-import numpy as np
 
 GPIO.setmode(GPIO.BCM)
 
@@ -22,53 +28,52 @@ def judge_signal(self):
     time.sleep(0.003)
     global sensor
     global dataset
-    current_data = np.zeros([1, 9])
+    global dataset_header
+
+    current_data = [0, 0, 0]  # Initialize data array (list)
+
     reason = sensor.get_interrupt()
 
-    time_now_text_terminal, time_now_text_file, time_now_int = get_time()
+    dt_now_reformat, _ = fun.get_time_now()
 
     if reason == 0x01:  # Too much noise
         sensor.raise_noise_floor()
-        print(time_now_text_terminal, "Noise level too high !")
-        current_data[0, 0:6] = time_now_int[0, 0:6]
-        current_data[0, 6] = reason
+        print(dt_now_reformat, "Noise level too high !")
+        current_data[0] = dt_now_reformat
+        current_data[1] = 'noise'
     elif reason == 0x04:  # Disturber
         sensor.set_mask_disturber(True)
-        print(time_now_text_terminal, "Disturber detected !")
-        current_data[0, 0:6] = time_now_int[0, 0:6]
-        current_data[0, 6] = reason
+        print(dt_now_reformat, "Disturber detected !")
+        current_data[0] = dt_now_reformat
+        current_data[1] = 'disturber'
     elif reason == 0x08:  # Lightning
         distance = sensor.get_distance()
         energy = sensor.get_energy()
-        print(time_now_text_terminal, "Lightning detected !", str(distance), str(energy))
-        current_data[0, 0:6] = time_now_int[0, 0:6]
-        current_data[0, 6] = reason
-        current_data[0, 7] = distance
-        current_data[0, 8] = energy
+        print(dt_now_reformat, "Lightning detected ! Distance:", str(distance))
+        current_data[0] = dt_now_reformat
+        current_data[1] = 'lightning'
+        current_data[2] = distance
 
-    dataset = np.concatenate((dataset, current_data), axis=0)
+    dataset.append(current_data)
 
     # Replace data file 'data_as3935.csv' when new data comes
     # Version management will be processed by 'AS3935_DataVerMan.py'
-    file_address = cp.FileAddress_as3935
-    csv_filename = 'data_as3935.csv'
-    np.savetxt(file_address + csv_filename, dataset, delimiter=',', fmt='%g')
+
+    fun.save_list_to_csv(cp.FileAddress_as3935 + 'data_as3935.csv', dataset, dataset_header)
 
 
 # Start
-dataset = np.zeros([1, 9])  # Initialize data array
+dataset = []  # Initialize data array
+dataset_header = ['Time', 'Marker', 'Distance']
 
 # Create data file for test the cloud service
-file_address = cp.FileAddress_as3935
-csv_filename = 'data_as3935.csv'
-np.savetxt(file_address + csv_filename, dataset, delimiter=',', fmt='%g')
+fun.save_list_to_csv(cp.FileAddress_as3935 + 'data_as3935.csv', dataset, dataset_header)
 
 GPIO.setup(cp.IRQ_GPIONUM, GPIO.IN)  # Set GPIO mode as input
-GPIO.add_event_detect(cp.IRQ_GPIONUM, GPIO.RISING, callback=judge_signal) # If detect signal, judge the type
+GPIO.add_event_detect(cp.IRQ_GPIONUM, GPIO.RISING, callback=judge_signal)  # Judge
 
-# Print first message
-time_now_text_terminal, time_now_text_file, time_now_int = get_time()
-print(time_now_text_terminal, "Waiting for lightning...")
+dt_now_reformat, _ = fun.get_time_now()
+print(dt_now_reformat, "Waiting for lightning...")
 
 try:
     while True:
