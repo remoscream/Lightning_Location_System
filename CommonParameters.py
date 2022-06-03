@@ -6,7 +6,8 @@
 """
 
 # Common
-SyncPeriod = 1800       # Synchronization period for uploading to cloud, unit : second
+# The time duration per file for bme280 is calculated by SyncPeriod/TimeStep
+SyncPeriod = 30       # Synchronization period for uploading to cloud, unit : second
 TimeStep = 1            # Time step for saving each data point, unit : second
 
 # as3935

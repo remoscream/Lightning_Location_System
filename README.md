@@ -215,3 +215,7 @@ You should confirm your action before the deletion. (Input `Y` to confirm)
 __<span style="color: red; ">But be attention!!! This is very dangerous when you have old data on the cloud especially when `Sync.py` is running. </span>__
 
 __<span style="color: red; ">I highly recommend you to check the data on the cloud and backup the data whether it's really useful before the deletion. </span>__
+
+## 7 Update logs
+### 20222/06/02 (Thursday)
+1. AS3935.py

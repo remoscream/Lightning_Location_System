@@ -29,7 +29,7 @@ if __name__ == '__main__':
             dataset = []
             current_data = [0, 0, 0, 0]
 
-            _, dt_now_reformat_int = fun.get_time_now()
+            invalid, timestamp_start_sampling = fun.get_time_now()
 
             # Sub loop for creating each data file
             for i in range(0, data_num, 1):
@@ -46,19 +46,24 @@ if __name__ == '__main__':
                 current_data[2] = pressure / 100
                 current_data[3] = humidity
 
-                dataset.append(current_data)
-
                 # Print data in terminal
                 print(dt_now_reformat_str)
                 print("Temperature : %6.2f °C" % temperature)
                 print('Pressure : %7.2f hPa' % (pressure / 100))
                 print("Humidity : %6.2f %%\033[4A" % humidity)  # '\033[4A' for display data at first position
 
+
+
                 time.sleep(cp.TimeStep)
+
+                dataset.append(current_data)
+
+                print(dataset)
+
 
             # Save data to csv file
             dataset_header = ['Time', 'Temperature', 'Pressure', 'Humidity']
-            filename = 'data_bme280_' + dt_now_reformat_int + '.csv'
+            filename = 'data_bme280_' + timestamp_start_sampling + '.csv'
             fun.save_list_to_csv(cp.FileAddress_bme280 + filename, dataset, dataset_header)
 
     except KeyboardInterrupt:
