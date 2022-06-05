@@ -1,16 +1,7 @@
+import functions_common as fun
 import CommonParameters as cp
 import time
 import shutil
-from datetime import datetime
-
-
-# Get time text (now)
-def get_time_text():
-    dt_now = datetime.now()
-    time_now_text = dt_now.strftime("%m-%d-%H-%M-%S")
-
-    return time_now_text
-
 
 if __name__ == '__main__':
     try:
@@ -19,7 +10,7 @@ if __name__ == '__main__':
 
         time.sleep(20)  # wait for AS3935.py create first file
         while True:
-            time_text = get_time_text()
+            _, time_text = fun.get_time_now()
             filename_new = 'data_as3935_' + time_text + '.csv'
 
             # Backup data
