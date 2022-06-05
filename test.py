@@ -1,9 +1,17 @@
-s = []
-a = [1,2,3,4]
+import functions_common as fun
+import time
 
-b = [2,2,2,2]
+dateset = []
 
-s.append(a)
-s.append(b)
+for i in range(0, 5, 1):
+    currentdata = [0, 0]
+    dt_now_reformat_str, _ = fun.get_time_now()
 
-print(s)
+    currentdata[0] = dt_now_reformat_str
+    currentdata[1] = i
+
+    dateset.append(currentdata)
+
+    time.sleep(1)
+
+print(dateset)
